@@ -1,53 +1,28 @@
 # Space Wars
 
-Jogo de nave no terminal feito em Java, no estilo dos jogos do Atari.
+Terminal space shooter written in Java, inspired by classic Atari games. Enemies use a local Ollama model to decide how to attack.
 
-A ideia é simples e divertida: você voa livremente pelo mapa e atira nos
-inimigos, e eles decidem sozinhos como te atacar usando o
-[Ollama](https://ollama.com) (IA local) para pensar. Cada inimigo tem nome e
-personalidade, então o comportamento muda de partida para partida.
+## Requirements
 
-## Como rodar
+- Java 21+
+- Ollama with the `llama3.2:1b` model
 
-Precisa de Java 21+ e do Ollama com o modelo `llama3.2:1b`:
+## Run
 
 ```bash
 ollama pull llama3.2:1b
 ollama serve
-```
-
-Depois, na pasta do projeto:
-
-```bash
 javac -encoding UTF-8 -cp "lib\*" -d out src\*.java
 java -cp "out;lib/*" Main
 ```
 
-No Linux ou macOS, troque `;` por `:` no classpath.
+On Linux or macOS, use `:` instead of `;` in the classpath.
 
-Se o Ollama estiver desligado o jogo não trava: os inimigos entram no modo
-instinto e continuam atacando.
+## Controls
 
-## Controles
+- `WASD` or arrow keys: move
+- `Space` or `F`: shoot
+- `Q`: quit
+- `R`: restart after game over
 
-- `WASD` ou setas: mover a nave
-- `ESPAÇO` ou `F`: atirar
-- `Q`: sair
-- `R`: reiniciar depois do game over
-
-## Estrutura
-
-```text
-src/Main.java      ponto de entrada
-src/Game.java      loop, desenho e regras
-src/Player.java    nave do jogador
-src/Enemy.java     inimigos (só executam o plano do Ollama)
-src/Bullet.java    tiros
-src/OllamaAI.java  conversa com o Ollama
-lib/               biblioteca JLine (teclado sem Enter)
-```
-
-## Observações
-
-- O modelo usado é configurado em `OllamaAI.java`.
-- Projeto simples, feito para aprender e se divertir.
+If Ollama is offline, the game still works in instinct mode.
